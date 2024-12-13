@@ -5,8 +5,8 @@ set -e
 echo $"START: $(date)"
 
 #cp ./scripts/github-pipeline/github-ormconfig.json ./ormconfig.json
-echo 'ormconfig.json: ';
-cat ormconfig.json
+#echo 'ormconfig.json: ';
+#cat ormconfig.json
 
 echo $'\n######################################################################';
 echo 'Reinstalling npm modules...';
@@ -27,11 +27,6 @@ echo $'######################################################################\n'
 #echo 'Typescript compiled!';
 #rm -rf ./out;
 
-echo 'AWS configuration'
-aws configure set aws_access_key_id AKIA5IRQ22MM7XTVIWWV
-aws configure set aws_secret_access_key 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
-aws configure set default.region eu-west-1
-echo 'AWS configured'
 
 
 echo $'\n######################################################################';
