@@ -1,0 +1,33 @@
+name: ci-pipeline
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+        - 32574:3306
+
+    strategy:
+      max-parallel: 10
+      matrix:
+        node-version: [20.11.1]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install, build, and test
+      run: |
+        sh scripts/github-pipeline/github-pipeline
+      env:
+        env: test
