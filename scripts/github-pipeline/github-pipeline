@@ -34,6 +34,7 @@ echo 'Running DB migration on test database...';
 echo "$(date)"
 echo $'######################################################################\n';
 echo $MYSQL_ROOT_PASSWORD
+echo $MYSQL_PASSWORD
 sudo systemctl start mysql
 mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE SCHEMA \`vave-test\` DEFAULT CHARACTER SET utf8;"
 mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE SCHEMA \`vave-test-logs\` DEFAULT CHARACTER SET utf8;"
