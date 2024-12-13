@@ -18,6 +18,7 @@ jobs:
         ports:
         - 32574:3306
     steps:
+    - uses: actions/checkout@v2
     - name: npm install, build, and test
       run: |
         echo "checking pipeline file"
