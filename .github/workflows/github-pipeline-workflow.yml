@@ -14,15 +14,18 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
         - 32574:3306
-
-    strategy:
-      max-parallel: 10
-      matrix:
-        node-version: [20.11.1]
-
     steps:
+    - uses: actions/checkout@v2
     - name: npm install, build, and test
       run: |
+        echo "checking pipeline file"
+        cd ..
+        ls
+        pwd
+        ls -la
+        chmod a+x scripts/github-pipeline/github-pipeline
         sh scripts/github-pipeline/github-pipeline
       env:
-        env: test 
+          MYSQL_USER: sys_dbdeploy
+          MYSQL_PASSWORD: P@sswd1
+          MYSQL_DATABASE: vave-test
