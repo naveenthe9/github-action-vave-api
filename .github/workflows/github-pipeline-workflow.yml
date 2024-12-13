@@ -12,6 +12,10 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
+          MYSQL_USER: sys_dbdeploy
+          MYSQL_PASSWORD: P@sswd1
+          MYSQL_DATABASE: vave-test
+          
         ports:
         - 32574:3306
 
