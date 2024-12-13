@@ -21,7 +21,6 @@ jobs:
         echo "checking pipeline file"
         sh scripts/github-pipeline/github-pipeline
       env:
-          MYSQL_ROOT_PASSWORD: root
           MYSQL_USER: sys_dbdeploy
           MYSQL_PASSWORD: P@sswd1
           MYSQL_DATABASE: vave-test
