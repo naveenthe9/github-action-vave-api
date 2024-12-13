@@ -21,6 +21,7 @@ jobs:
         cd ..
         ls
         pwd
+        ls -la
         chmod a+x scripts/github-pipeline/github-pipeline
         sh scripts/github-pipeline/github-pipeline
       env:
