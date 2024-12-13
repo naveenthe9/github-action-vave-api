@@ -18,6 +18,8 @@ jobs:
     - name: npm install, build, and test
       run: |
         echo "checking pipeline file"
+        ls
+        pwd
         chmod a+x scripts/github-pipeline/github-pipeline
         sh scripts/github-pipeline/github-pipeline
       env:
