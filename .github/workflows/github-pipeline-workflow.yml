@@ -18,7 +18,6 @@ jobs:
     - name: npm install, build, and test
       run: |
         echo "checking pipeline file"
-        sh ls
         sh scripts/github-pipeline/github-pipeline
       env:
           MYSQL_USER: sys_dbdeploy
