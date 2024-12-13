@@ -9,13 +9,7 @@ jobs:
 
     services:
       mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_USER: sys_dbdeploy
-          MYSQL_PASSWORD: P@sswd1
-          MYSQL_DATABASE: vave-test
-          
+        image: mysql:8.0         
         ports:
         - 32574:3306
 
@@ -34,4 +28,7 @@ jobs:
       run: |
         sh scripts/github-pipeline/github-pipeline
       env:
-        env: test
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_USER: sys_dbdeploy
+          MYSQL_PASSWORD: P@sswd1
+          MYSQL_DATABASE: vave-test
