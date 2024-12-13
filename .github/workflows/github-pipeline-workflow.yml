@@ -19,11 +19,9 @@ jobs:
     - name: npm install, build, and test
       run: |
         echo "checking pipeline file"
-        cd ..
         ls
         pwd
         ls -la
-        chmod a+x scripts/github-pipeline/github-pipeline
         sh scripts/github-pipeline/github-pipeline
       env:
           MYSQL_USER: sys_dbdeploy
