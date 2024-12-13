@@ -5,7 +5,7 @@ set -e
 echo $"START: $(date)"
 
 #cp ./scripts/github-pipeline/github-ormconfig.json ./ormconfig.json
-echo 'ormconfig.json: ';
+#echo 'ormconfig.json: ';
 #cat ormconfig.json
 
 echo $'\n######################################################################';
