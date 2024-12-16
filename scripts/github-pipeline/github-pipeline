@@ -43,8 +43,7 @@ mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE USER 'developer'@'localhost' IDEN
 #mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "SELECT User, Host FROM user;"
 #echo "MySQL database users"
 echo "$(mysql -uroot -proot -e "SELECT User FROM mysql.user;")"
-echo "selecting database"
-echo "$(mysql -uroot -proot -e "show databases; use vave-test-logs; show tables;")"
+
 #echo "migration queries"
 mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE TABLE \`vave-test-logs\`.\`logs\` (
                           \`id\` BIGINT NOT NULL AUTO_INCREMENT,
@@ -66,6 +65,7 @@ mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE TABLE \`vave-test-logs\`.\`logs\`
                           INDEX \`IDX_userId\` (\`userId\` ASC, \`createdAt\` ASC))
                         ENGINE = InnoDB
                         DEFAULT CHARACTER SET = utf8;"
+echo "$(mysql -uroot -proot -e "use vave-test-logs; show tables;")"
 echo 'DB created. User created.';
 
 
