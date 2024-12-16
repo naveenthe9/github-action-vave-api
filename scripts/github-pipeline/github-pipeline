@@ -65,7 +65,7 @@ mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE TABLE \`vave-test-logs\`.\`logs\`
                           INDEX \`IDX_userId\` (\`userId\` ASC, \`createdAt\` ASC))
                         ENGINE = InnoDB
                         DEFAULT CHARACTER SET = utf8;"
-echo "$(mysql -uroot -proot -e "use vave-test-logs; show tables;")"
+echo "$(mysql -usys_dbdeploy -pP@sswd1 -e "use vave-test-logs; show tables;")"
 echo 'DB created. User created.';
 
 
