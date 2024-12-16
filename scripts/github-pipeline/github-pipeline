@@ -43,6 +43,8 @@ mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE USER 'developer'@'localhost' IDEN
 #mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "SELECT User, Host FROM user;"
 #echo "MySQL database users"
 echo "$(mysql -uroot -proot -e "SELECT User FROM mysql.user;")"
+echo "select database"
+echo "$(mysql -uroot -proot -e "show databases; use vave-test-logs; select * from logs")"
 #echo "migration queries"
 mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE TABLE \`vave-test-logs\`.\`logs\` (
                           \`id\` BIGINT NOT NULL AUTO_INCREMENT,
