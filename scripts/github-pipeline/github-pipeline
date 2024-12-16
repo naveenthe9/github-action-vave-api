@@ -39,7 +39,7 @@ sudo systemctl start mysql
 mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE SCHEMA \`vave-test\` DEFAULT CHARACTER SET utf8;"
 mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE SCHEMA \`vave-test-logs\` DEFAULT CHARACTER SET utf8;"
 mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE USER 'sys_dbdeploy'@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD' REQUIRE SSL; GRANT CREATE, ALTER, DROP, REFERENCES, INDEX, SELECT, UPDATE, INSERT, DELETE ON *.* TO 'sys_dbdeploy'@'localhost'; FLUSH PRIVILEGES;"
-mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE USER 'developer'@'%' IDENTIFIED BY 'developer' REQUIRE SSL; GRANT ALL PRIVILEGES ON *.* TO 'developer'@'%'; FLUSH PRIVILEGES;"
+mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE USER 'developer'@'%' IDENTIFIED BY 'developer'; GRANT ALL PRIVILEGES ON *.* TO 'developer'@'%'; FLUSH PRIVILEGES;"
 #mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "SELECT User, Host FROM user;"
 #echo "MySQL database users"
 echo "$(mysql -uroot -proot -e "SELECT User FROM mysql.user;")"
