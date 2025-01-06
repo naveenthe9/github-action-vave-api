@@ -21,12 +21,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: npm install, build, and test
-      run: |
-        echo "checking pipeline file"
-        echo "$MYSQL_PASSWORD"
-        sh scripts/github-pipeline/github-pipeline
       env:
+          SUPER_SECRET: ${{ secrets.ACCESS_KEY }}
           MYSQL_ROOT_PASSWORD: ${{env.MYSQL_ROOT_PASSWORD}}
           MYSQL_USER: ${{env.MYSQL_USER}}
           MYSQL_PASSWORD: ${{env.MYSQL_PASSWORD}}
           MYSQL_DATABASE: ${{env.MYSQL_DATABASE}}
+      run: |
+        echo "$SUPER_SECRET"
+        echo "checking pipeline file"
+        echo "$MYSQL_PASSWORD"
+        sh scripts/github-pipeline/github-pipeline
+
