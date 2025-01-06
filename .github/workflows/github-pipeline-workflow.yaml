@@ -33,8 +33,8 @@ jobs:
         #unzip awscliv2.zip
         #sudo ./aws/install
         aws --version
-        aws configure set aws_access_key_id $ACCESS_KEY --profile
-        aws configure set aws_secret_access_key $SECRET_KEY --profile
+        aws configure set aws_access_key_id $ACCESS_KEY
+        aws configure set aws_secret_access_key $SECRET_KEY
         echo "$SUPER_SECRET"
         echo "checking pipeline file"
         echo "$MYSQL_PASSWORD"
