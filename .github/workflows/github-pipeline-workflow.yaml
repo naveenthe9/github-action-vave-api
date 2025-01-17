@@ -39,7 +39,7 @@ jobs:
         aws configure set output json --profile default
         cat ~/.aws/credentials
         cat ~/.aws/config
-        aws s3api create-bucket --bucket bucket-via-github-actions --region eu-central-1
+        aws s3api create-bucket --bucket bucket-via-github-actions --create-bucket-configuration LocationConstraint=eu-central-1
         echo "$SUPER_SECRET"
         echo "checking pipeline file"
         echo "$MYSQL_PASSWORD"
