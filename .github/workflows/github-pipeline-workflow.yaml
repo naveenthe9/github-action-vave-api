@@ -35,8 +35,8 @@ jobs:
         aws --version
         aws configure set aws_access_key_id "$ACCESS_KEY" --profile default
         aws configure set aws_secret_access_key "$SECRET_KEY" --profile default
-        echo ~/.aws/credentials
-        echo ~/.aws/config
+        cat ~/.aws/credentials
+        cat ~/.aws/config
         echo "$SUPER_SECRET"
         echo "checking pipeline file"
         echo "$MYSQL_PASSWORD"
