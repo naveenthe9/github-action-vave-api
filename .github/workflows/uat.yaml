@@ -41,7 +41,6 @@ jobs:
             echo "Unknown environment!"
             exit 1
             fi
-            echo "Unknown environment!"
     - name: Set bucket name based on environment
       run: |
         #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -57,7 +56,7 @@ jobs:
         echo "region=$ACCESS_KEY" >> ~/abcd.txt
         cat ~/abcd.txt
         echo ${{ github.ref }}
-        #aws s3api create-bucket --bucket bucket-via-github-actions --create-bucket-configuration LocationConstraint=eu-central-1
+        aws s3api create-bucket --bucket $BUCKET_NAME --create-bucket-configuration LocationConstraint=eu-central-1
         echo "$SUPER_SECRET"
         echo "checking pipeline file"
         echo "$MYSQL_PASSWORD"
