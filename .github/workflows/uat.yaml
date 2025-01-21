@@ -41,7 +41,7 @@ jobs:
           else
             echo "Unknown environment!"
             echo "Deploying to bucket: $BUCKET_NAME"
-	    #echo "Deploying to bucket: ${{ vars.QA_BUCKET_NAME }}"
+			#echo "Deploying to bucket: ${{ vars.QA_BUCKET_NAME }}"
             exit 1
             fi
     - name: Set bucket name based on environment
