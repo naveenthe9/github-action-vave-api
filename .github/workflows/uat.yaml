@@ -59,7 +59,7 @@ jobs:
         cat ~/abcd.txt
         echo ${{ github.ref }}
         echo "Deploying to bucket 2: $BUCKET_NAME"
-        #aws s3api create-bucket --bucket ${{ vars.QA_BUCKET_NAME }} --create-bucket-configuration LocationConstraint=eu-central-1
+        aws s3api create-bucket --bucket $BUCKET_NAME --create-bucket-configuration LocationConstraint=eu-central-1
         echo "$SUPER_SECRET"
         echo "checking pipeline file"
         echo "$MYSQL_PASSWORD"
