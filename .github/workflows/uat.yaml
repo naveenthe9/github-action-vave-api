@@ -31,7 +31,7 @@ jobs:
           MYSQL_PASSWORD: ${{env.MYSQL_PASSWORD}}
           MYSQL_DATABASE: ${{env.MYSQL_DATABASE}}
       run: |
-          if [[ "${{ github.ref }}" == "refs/heads/qa" ]]; then
+          if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
             echo "BUCKET_NAME=${{ secrets.QA_BUCKET_NAME }}" >> $GITHUB_ENV
           elif [[ "${{ github.ref }}" == "refs/heads/preprod" ]]; then
             echo "BUCKET_NAME=${{ secrets.PREPROD_BUCKET_NAME }}" >> $GITHUB_ENV
