@@ -30,9 +30,10 @@ jobs:
           MYSQL_USER: ${{env.MYSQL_USER}}
           MYSQL_PASSWORD: ${{env.MYSQL_PASSWORD}}
           MYSQL_DATABASE: ${{env.MYSQL_DATABASE}}
+          REPOSITORY_VAR: ${{ vars.QA_BUCKET_NAME }}
       run: |
           if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
-            echo "BUCKET_NAME=${{ vars.QA_BUCKET_NAME }}" >> $GITHUB_ENV
+            echo "BUCKET_NAME=${{ vars.REPOSITORY_VAR }}" >> $GITHUB_ENV
             echo "Deploying to AWS bucket: $BUCKET_NAME"
           elif [[ "${{ github.ref }}" == "refs/heads/preprod" ]]; then
             echo "BUCKET_NAME=${{ secrets.PREPROD_BUCKET_NAME }}" >> $GITHUB_ENV
