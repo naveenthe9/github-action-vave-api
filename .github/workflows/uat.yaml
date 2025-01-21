@@ -33,6 +33,7 @@ jobs:
       run: |
           if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
             echo "BUCKET_NAME=${{ secrets.QA_BUCKET_NAME }}" >> $GITHUB_ENV
+            echo "Deploying to bucket: $BUCKET_NAME"
           elif [[ "${{ github.ref }}" == "refs/heads/preprod" ]]; then
             echo "BUCKET_NAME=${{ secrets.PREPROD_BUCKET_NAME }}" >> $GITHUB_ENV
           elif [[ "${{ github.ref }}" == "refs/heads/prod" ]]; then
