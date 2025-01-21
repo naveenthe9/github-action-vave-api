@@ -32,7 +32,7 @@ jobs:
           MYSQL_DATABASE: ${{env.MYSQL_DATABASE}}
       run: |
           if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
-            echo "BUCKET_NAME=${{vars.QA_BUCKET_NAME}}" >> $GITHUB_ENV
+            echo "BUCKET_NAME=${{ vars.QA_BUCKET_NAME }}" >> $GITHUB_ENV
             echo "Deploying to bucket: $BUCKET_NAME"
           elif [[ "${{ github.ref }}" == "refs/heads/preprod" ]]; then
             echo "BUCKET_NAME=${{ secrets.PREPROD_BUCKET_NAME }}" >> $GITHUB_ENV
