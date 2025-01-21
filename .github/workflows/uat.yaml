@@ -31,7 +31,17 @@ jobs:
           MYSQL_PASSWORD: ${{env.MYSQL_PASSWORD}}
           MYSQL_DATABASE: ${{env.MYSQL_DATABASE}}
       run: |
-        echo "Unknown environment!"
+          if [[ "${{ github.ref }}" == "refs/heads/qa" ]]; then
+            echo "BUCKET_NAME=${{ secrets.QA_BUCKET_NAME }}" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/preprod" ]]; then
+            echo "BUCKET_NAME=${{ secrets.PREPROD_BUCKET_NAME }}" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/prod" ]]; then
+            echo "BUCKET_NAME=${{ secrets.PROD_BUCKET_NAME }}" >> $GITHUB_ENV
+          else
+            echo "Unknown environment!"
+            exit 1
+            fi
+            echo "Unknown environment!"
     - name: Set bucket name based on environment
       run: |
         #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
