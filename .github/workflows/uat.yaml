@@ -43,7 +43,8 @@ jobs:
         cat ~/.aws/config
         echo "region=$ACCESS_KEY" >> ~/abcd.txt
         cat ~/abcd.txt
-        aws s3api create-bucket --bucket bucket-via-github-actions --create-bucket-configuration LocationConstraint=eu-central-1
+        echo $github.ref
+        #aws s3api create-bucket --bucket bucket-via-github-actions --create-bucket-configuration LocationConstraint=eu-central-1
         echo "$SUPER_SECRET"
         echo "checking pipeline file"
         echo "$MYSQL_PASSWORD"
