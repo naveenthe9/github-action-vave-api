@@ -31,4 +31,37 @@ jobs:
           MYSQL_PASSWORD: ${{env.MYSQL_PASSWORD}}
           MYSQL_DATABASE: ${{env.MYSQL_DATABASE}}
       run: |
-          echo bucket name as = ${{ vars.QA_BUCKET_NAME }}
+          if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
+            echo "BUCKET_NAME=${{ vars.QA_BUCKET_NAME }}" >> $GITHUB_ENV
+            echo "Deploying to AWS bucket: $BUCKET_NAME"
+          elif [[ "${{ github.ref }}" == "refs/heads/preprod" ]]; then
+            echo "BUCKET_NAME=${{ secrets.PREPROD_BUCKET_NAME }}" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/prod" ]]; then
+            echo "BUCKET_NAME=${{ secrets.PROD_BUCKET_NAME }}" >> $GITHUB_ENV
+          else
+            echo "Unknown environment!"
+            echo "Deploying to bucket: $BUCKET_NAME"
+			echo "Deploying to bucket: ${{ vars.QA_BUCKET_NAME }}"
+            exit 1
+            fi
+    - name: Set bucket name based on environment
+      run: |
+        #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        #unzip awscliv2.zip
+        #sudo ./aws/install
+        aws --version
+        aws configure set aws_access_key_id "$ACCESS_KEY" --profile default
+        aws configure set aws_secret_access_key "$SECRET_KEY" --profile default
+        aws configure set region eu-central-1 --profile default
+        aws configure set output json --profile default
+        cat ~/.aws/credentials
+        cat ~/.aws/config
+        echo "region=$ACCESS_KEY" >> ~/abcd.txt
+        cat ~/abcd.txt
+        echo ${{ github.ref }}
+        echo "Deploying to bucket: $BUCKET_NAME"
+        aws s3api create-bucket --bucket ${{ vars.QA_BUCKET_NAME }} --create-bucket-configuration LocationConstraint=eu-central-1
+        echo "$SUPER_SECRET"
+        echo "checking pipeline file"
+        echo "$MYSQL_PASSWORD"
+        #sh scripts/github-pipeline/github-pipeline
