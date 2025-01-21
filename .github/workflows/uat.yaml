@@ -33,14 +33,14 @@ jobs:
       run: |
           if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
             echo "BUCKET_NAME=${{ vars.QA_BUCKET_NAME }}" >> $GITHUB_ENV
-            echo "Deploying to AWS bucket: $BUCKET_NAME"
+            echo "Deploying to bucket 0: $BUCKET_NAME"
           elif [[ "${{ github.ref }}" == "refs/heads/preprod" ]]; then
             echo "BUCKET_NAME=${{ secrets.PREPROD_BUCKET_NAME }}" >> $GITHUB_ENV
           elif [[ "${{ github.ref }}" == "refs/heads/prod" ]]; then
             echo "BUCKET_NAME=${{ secrets.PROD_BUCKET_NAME }}" >> $GITHUB_ENV
           else
             echo "Unknown environment!"
-            echo "Deploying to bucket: $BUCKET_NAME"
+            echo "Deploying to bucket 1: $BUCKET_NAME"
             exit 1
             fi
     - name: Set bucket name based on environment
@@ -58,7 +58,7 @@ jobs:
         echo "region=$ACCESS_KEY" >> ~/abcd.txt
         cat ~/abcd.txt
         echo ${{ github.ref }}
-        echo "Deploying to bucket: $BUCKET_NAME"
+        echo "Deploying to bucket 2: $BUCKET_NAME"
         #aws s3api create-bucket --bucket ${{ vars.QA_BUCKET_NAME }} --create-bucket-configuration LocationConstraint=eu-central-1
         echo "$SUPER_SECRET"
         echo "checking pipeline file"
