@@ -14,7 +14,6 @@ jobs:
           if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
       env:
         AWSCLOUDFORMATIONCONFIG: {\"configLevel\":\"project\",\"useProfile\":true,\"profileName\":\"default\",\"region\":\"us-west-2\"}
-		
             echo "BUCKET_NAME=${{ vars.QA_BUCKET_NAME }}" >> $GITHUB_ENV
             echo "Deploying to bucket 0: $BUCKET_NAME"
           elif [[ "${{ github.ref }}" == "refs/heads/preprod" ]]; then
