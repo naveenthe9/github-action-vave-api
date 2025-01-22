@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       AWSCLOUDFORMATIONCONFIG: "{\"configLevel\":\"project\",\"useProfile\":true,\"profileName\":\"default\",\"region\":\"us-west-2\"}"
-      AMPLIFY: "{\"appId\":\"$AMPLIFY_PROJECT_ID\",\"envName\":\"dev\",\"defaultEditor\":\"none\"}"
+      AMPLIFY: "{\"appId\":\"$AWSCLOUDFORMATIONCONFIG\",\"envName\":\"dev\",\"defaultEditor\":\"none\"}"
     steps:
     - uses: actions/checkout@v2
     - name: npm install, build, and test
