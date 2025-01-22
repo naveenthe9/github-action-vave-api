@@ -54,11 +54,6 @@ jobs:
         aws configure set aws_secret_access_key "$SECRET_KEY" --profile default
         aws configure set region eu-central-1 --profile default
         aws configure set output json --profile default
-        cat ~/.aws/credentials
-        cat ~/.aws/config
-        echo "region=$ACCESS_KEY" >> ~/abcd.txt
-        cat ~/abcd.txt
-        echo ${{ github.ref }}
         echo "Deploying to bucket 2: $BUCKET_NAME"
         echo "AWSCLOUDFORMATIONCONFIG value is ${{ vars.AWSCLOUDFORMATIONCONFIG }}"
         echo "AMPLIFY_PROJECT_ID value ${{ vars.AMPLIFY_PROJECT_ID }}"
