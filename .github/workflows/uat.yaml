@@ -12,21 +12,9 @@ jobs:
         MYSQL_USER: sys_dbdeploy
         MYSQL_PASSWORD: P@sswd1
         MYSQL_DATABASE: vave-test
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: ${{env.MYSQL_ROOT_PASSWORD}}
-        ports:
-        - 32574:3306
     steps:
     - uses: actions/checkout@v2
     - name: npm install, build, and test
-      env:
-          MYSQL_ROOT_PASSWORD: ${{env.MYSQL_ROOT_PASSWORD}}
-          MYSQL_USER: ${{env.MYSQL_USER}}
-          MYSQL_PASSWORD: ${{env.MYSQL_PASSWORD}}
-          MYSQL_DATABASE: ${{env.MYSQL_DATABASE}}
       run: |
           if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
             echo "BUCKET_NAME=${{ vars.QA_BUCKET_NAME }}" >> $GITHUB_ENV
