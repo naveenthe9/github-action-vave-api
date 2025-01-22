@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       AWSCLOUDFORMATIONCONFIG: "{\"configLevel\":\"project\",\"useProfile\":true,\"profileName\":\"default\",\"region\":\"us-west-2\"}"
+      AMPLIFY: "{\"appId\":\"$AMPLIFY_PROJECT_ID\",\"envName\":\"dev\",\"defaultEditor\":\"none\"}"
     steps:
     - uses: actions/checkout@v2
     - name: npm install, build, and test
@@ -34,7 +35,7 @@ jobs:
         #unzip awscliv2.zip
         #sudo ./aws/install
         aws --version
-        echo "AMPLIFY_PROJECT_ID is ${{ vars.AMPLIFY_PROJECT_ID }}"
+        echo "AMPLIFY is $AMPLIFY }}"
         aws configure set aws_access_key_id "$ACCESS_KEY" --profile default
         aws configure set aws_secret_access_key "$SECRET_KEY" --profile default
         aws configure set region eu-central-1 --profile default
