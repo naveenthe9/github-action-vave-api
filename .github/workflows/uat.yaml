@@ -17,11 +17,11 @@ jobs:
  
       - name: Set dependent environment variables
         run: |
-          echo "AMPLIFY=AMPLIFY="{\"appId\":\"$AMPLIFY_PROJECT_ID\",\"envName\":\"dev\",\"defaultEditor\":\"none\"}"" >> $GITHUB_ENV
+          echo "AMPLIFY="{\"appId\":\"$AMPLIFY_PROJECT_ID\",\"envName\":\"dev\",\"defaultEditor\":\"none\"}"" >> $GITHUB_ENV
  
       - name: Deploy to AWS
         run: |
           echo "Deploying to region $AWS_REGION with environment $AMPLIFY_ENV_NAME"
           # Your deployment commands here
-          echo "Environment Name: $AMPLIFY_ENV_NAME"
-          echo "Amplify value: $AWS_CLOUDFORMATION_CONFIG"
+          echo "Environment Name: $AWS_CLOUDFORMATION_CONFIG"
+          echo "Amplify value: $AMPLIFY"
