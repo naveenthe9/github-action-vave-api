@@ -22,8 +22,8 @@ jobs:
  
       - name: Set dependent environment variables
         run: |
-          #echo "AMPLIFY={\"appId\":\"$AMPLIFY_PROJECT_ID\",\"envName\":\"dev\",\"defaultEditor\":\"none\"}" >> $GITHUB_ENV
           echo "FRONTEND="{\\"frontend\":\"javascript\",\\"framework\":\"react\",\\"config\":$PROJECTCONFIG\}" >> $GITHUB_ENV
+          echo PROVIDERS="{\\"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\}" >> $GITHUB_ENV
           
  
       - name: Deploy to AWS
@@ -34,3 +34,4 @@ jobs:
           echo "Amplify value: $AMPLIFY"
           echo "PROJECTCONFIG value is : $PROJECTCONFIG"
           echo "FRONTEND value is : $FRONTEND"
+          echo "PROVIDERS value is : $PROVIDERS"
