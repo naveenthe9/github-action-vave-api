@@ -1,3 +1,9 @@
+name: ci-pipeline
+
+on:
+  push:
+    branches:
+      - uat
 jobs:
   deploy:
     runs-on: ubuntu-latest
