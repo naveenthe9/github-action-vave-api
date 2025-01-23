@@ -17,11 +17,12 @@ jobs:
           if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
             echo "AWS_CLOUDFORMATION_CONFIG={\"configLevel\":\"project\",\"useProfile\":true,\"profileName\":\"default\",\"region\":\"us-west-2\"}" >> $GITHUB_ENV
             echo "AMPLIFY={\"appId\":\"$AMPLIFY_PROJECT_ID\",\"envName\":\"dev\",\"defaultEditor\":\"none\"}" >> $GITHUB_ENV
+            echo "PROJECTCONFIG={\"SourceDir\":\"src\",\"DistributionDir\":\"dist/vave-web\",\"BuildCommand\":\"npm run-script build -- --env=$ENV\",\"StartCommand\":\"ng serve\"}" >> $GITHUB_ENV
           fi
  
       - name: Set dependent environment variables
         run: |
-          echo "Nothing!"
+          #echo "AMPLIFY={\"appId\":\"$AMPLIFY_PROJECT_ID\",\"envName\":\"dev\",\"defaultEditor\":\"none\"}" >> $GITHUB_ENV
  
       - name: Deploy to AWS
         run: |
@@ -29,3 +30,4 @@ jobs:
           # Your deployment commands here
           echo "Environment Name: $AWS_CLOUDFORMATION_CONFIG"
           echo "Amplify value: $AMPLIFY"
+          echo "PROJECTCONFIG value is : $PROJECTCONFIG"
