@@ -12,15 +12,16 @@ jobs:
       - name: Set base environment variables
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
-            echo "AWS_REGION=us-west-2" >> $GITHUB_ENV
+            echo "AWS_CLOUDFORMATION_CONFIG:"{\"configLevel\":\"project\",\"useProfile\":true,\"profileName\":\"default\",\"region\":\"us-west-2\"}"" >> $GITHUB_ENV
           fi
  
       - name: Set dependent environment variables
         run: |
-          echo "AMPLIFY_ENV_NAME=uattwo.$AWS_REGION" >> $GITHUB_ENV
+          echo "AMPLIFY=AMPLIFY:"{\"appId\":\"$AMPLIFY_PROJECT_ID\",\"envName\":\"dev\",\"defaultEditor\":\"none\"}"" >> $GITHUB_ENV
  
       - name: Deploy to AWS
         run: |
           echo "Deploying to region $AWS_REGION with environment $AMPLIFY_ENV_NAME"
           # Your deployment commands here
           echo "Environment Name: $AMPLIFY_ENV_NAME"
+          echo "Amplify value: $AWS_CLOUDFORMATION_CONFIG"
