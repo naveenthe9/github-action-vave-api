@@ -1,0 +1,26 @@
+name: ci-pipeline
+
+on:
+  push:
+    branches:
+      - uat
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Set base environment variables
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
+            echo "AWS_REGION=us-west-2" >> $GITHUB_ENV
+          fi
+ 
+      - name: Set dependent environment variables
+        run: |
+          echo "AMPLIFY_ENV_NAME=uattwo.$AWS_REGION" >> $GITHUB_ENV
+ 
+      - name: Deploy to AWS
+        run: |
+          echo "Deploying to region $AWS_REGION with environment $AMPLIFY_ENV_NAME"
+          # Your deployment commands here
+          echo "Environment Name: $AMPLIFY_ENV_NAME"
