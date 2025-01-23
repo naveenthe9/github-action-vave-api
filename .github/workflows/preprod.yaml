@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Set base environment variables
         run: |
-          if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
+          if [[ "${{ github.ref }}" == "refs/heads/preprod" ]]; then
             echo "AWS_REGION=us-west-2" >> $GITHUB_ENV
           fi
  
