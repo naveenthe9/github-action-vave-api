@@ -1,44 +1,20 @@
-on:
-  push:
-    branches:
-      - uat
-      - Preprod
-      - Dev
-      - Prod
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-    env:
-      BWS_REGION: ${{ vars.AWS_REGION }}
-
+ 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set environment variables for each environment
+      - name: Set base environment variables
         run: |
-           if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
-            echo "Setting UAT environment variables"
+          if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
             echo "AWS_REGION=us-west-2" >> $GITHUB_ENV
-            echo "AMPLIFY_ENV_NAME=uattwo."$AWS_REGION"" >> $GITHUB_ENV
-            elif [ "${GITHUB_REF##*/}" == "Preprod" ]; then
-            echo "Setting Preprod environment variables"
-            echo "AWS_REGION=us-east-1" >> $GITHUB_ENV
-            echo "AMPLIFY_ENV_NAME=preprod" >> $GITHUB_ENV
-            elif [ "${GITHUB_REF##*/}" == "Dev" ]; then
-            echo "Setting Dev environment variables"
-            echo "AWS_REGION=us-east-2" >> $GITHUB_ENV
-            echo "AMPLIFY_ENV_NAME=dev" >> $GITHUB_ENV
-            elif [ "${GITHUB_REF##*/}" == "Prod" ]; then
-            echo "Setting Prod environment variables"
-            echo "AWS_REGION=us-east-1" >> $GITHUB_ENV
-            echo "AMPLIFY_ENV_NAME=prod" >> $GITHUB_ENV
-            fi
-
+          fi
+ 
+      - name: Set dependent environment variables
+        run: |
+          echo "AMPLIFY_ENV_NAME=uattwo.$AWS_REGION" >> $GITHUB_ENV
+ 
       - name: Deploy to AWS
         run: |
           echo "Deploying to region $AWS_REGION with environment $AMPLIFY_ENV_NAME"
           # Your deployment commands here
-          echo "$AMPLIFY_ENV_NAME"
+          echo "Environment Name: $AMPLIFY_ENV_NAME"
