@@ -1,50 +1,44 @@
-name: ci-pipeline
-
 on:
   push:
     branches:
-      - uat
+      - UAT
+      - Preprod
+      - Dev
+      - Prod
+
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
     env:
-      AWSCLOUDFORMATIONCONFIG: "{\"configLevel\":\"project\",\"useProfile\":true,\"profileName\":\"default\",\"region\":\"us-west-2\"}"
-      AMPLIFY: "{\"appId\":\"env.AWSCLOUDFORMATIONCONFIG\",\"envName\":\"dev\",\"defaultEditor\":\"none\"}"
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+
     steps:
-    - uses: actions/checkout@v2
-    - name: npm install, build, and test
-      run: |
-          if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
-          echo "BUCKET_NAME=${{ vars.QA_BUCKET_NAME }}" >> $GITHUB_ENV
-          echo "Deploying to bucket 0: $BUCKET_NAME"
-          elif [[ "${{ github.ref }}" == "refs/heads/preprod" ]]; then
-          echo "BUCKET_NAME=${{ secrets.PREPROD_BUCKET_NAME }}" >> $GITHUB_ENV
-          elif [[ "${{ github.ref }}" == "refs/heads/prod" ]]; then
-          echo "BUCKET_NAME=${{ secrets.PROD_BUCKET_NAME }}" >> $GITHUB_ENV
-          else
-          echo "Unknown environment!"
-          echo "Deploying to bucket 1: $BUCKET_NAME"
-          exit 1
-          fi
-    - name: Set bucket name based on environment
-      env:
-        ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      run: |
-        #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        #unzip awscliv2.zip
-        #sudo ./aws/install
-        aws --version
-        echo "AMPLIFY is $AMPLIFY }}"
-        aws configure set aws_access_key_id "$ACCESS_KEY" --profile default
-        aws configure set aws_secret_access_key "$SECRET_KEY" --profile default
-        aws configure set region eu-central-1 --profile default
-        aws configure set output json --profile default
-        echo "Deploying to bucket 2: $BUCKET_NAME"
-        echo "AWSCLOUDFORMATIONCONFIG value is ${{ vars.AWSCLOUDFORMATIONCONFIG }}"
-        echo "AMPLIFY_PROJECT_ID value ${{ vars.AMPLIFY_PROJECT_ID }}"
-        #aws s3api create-bucket --bucket "$BUCKET_NAME" --create-bucket-configuration LocationConstraint=eu-central-1
-        echo "$SUPER_SECRET"
-        echo "checking pipeline file"
-        echo "$MYSQL_PASSWORD"
-        #sh scripts/github-pipeline/github-pipeline
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set environment variables for each environment
+        run: |
+           if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
+            echo "Setting UAT environment variables"
+            echo "AWS_REGION=us-west-2" >> $GITHUB_ENV
+            echo "AMPLIFY_ENV_NAME=uattwo.$AWS_REGION" >> $GITHUB_ENV
+            elif [ "${GITHUB_REF##*/}" == "Preprod" ]; then
+            echo "Setting Preprod environment variables"
+            echo "AWS_REGION=us-east-1" >> $GITHUB_ENV
+            echo "AMPLIFY_ENV_NAME=preprod" >> $GITHUB_ENV
+            elif [ "${GITHUB_REF##*/}" == "Dev" ]; then
+            echo "Setting Dev environment variables"
+            echo "AWS_REGION=us-east-2" >> $GITHUB_ENV
+            echo "AMPLIFY_ENV_NAME=dev" >> $GITHUB_ENV
+            elif [ "${GITHUB_REF##*/}" == "Prod" ]; then
+            echo "Setting Prod environment variables"
+            echo "AWS_REGION=us-east-1" >> $GITHUB_ENV
+            echo "AMPLIFY_ENV_NAME=prod" >> $GITHUB_ENV
+            fi
+
+      - name: Deploy to AWS
+        run: |
+          echo "Deploying to region $AWS_REGION with environment $AMPLIFY_ENV_NAME"
+          # Your deployment commands here
+          echo "$AMPLIFY_ENV_NAME"
