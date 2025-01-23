@@ -23,7 +23,7 @@ jobs:
       - name: Set dependent environment variables
         run: |
           echo "FRONTEND="{\\"frontend\":\"javascript\",\\"framework\":\"react\",\\"config\":$PROJECTCONFIG\}" >> $GITHUB_ENV
-          echo PROVIDERS="{\\"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\}" >> $GITHUB_ENV
+          echo "PROVIDERS="{\\"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\}" >> $GITHUB_ENV
           
  
       - name: Deploy to AWS
