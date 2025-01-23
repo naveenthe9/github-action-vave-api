@@ -2,7 +2,7 @@ name: ci-pipeline
 on:
   push:
     branches:
-      - preprod
+      - nfet
 
 jobs:
   deploy:
