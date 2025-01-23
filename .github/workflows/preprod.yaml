@@ -3,7 +3,7 @@ name: ci-pipeline
 on:
   push:
     branches:
-      - uat
+      - preprod
 jobs:
   deploy:
     runs-on: ubuntu-latest
