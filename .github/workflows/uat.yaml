@@ -22,7 +22,7 @@ jobs:
            if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
             echo "Setting UAT environment variables"
             echo "AWS_REGION=us-west-2" >> $GITHUB_ENV
-            echo "AMPLIFY_ENV_NAME=uattwo.env.AWS_REGION" >> $GITHUB_ENV
+            echo "AMPLIFY_ENV_NAME=uattwo."$AWS_REGION"" >> $GITHUB_ENV
             elif [ "${GITHUB_REF##*/}" == "Preprod" ]; then
             echo "Setting Preprod environment variables"
             echo "AWS_REGION=us-east-1" >> $GITHUB_ENV
