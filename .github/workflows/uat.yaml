@@ -4,11 +4,13 @@ on:
   push:
     branches:
       - uat
-      
+env:
+  AMPLIFY_PROJECT_ID: y2ive7qvralmt3
+  CLOUDFRONT_DISTRIBUTION_ID: EJD675VH0ZPN82
 jobs:
   deploy:
     runs-on: ubuntu-latest
- 
+
     steps:
       - name: Set base environment variables
         run: |
@@ -18,7 +20,7 @@ jobs:
  
       - name: Set dependent environment variables
         run: |
-          echo "AMPLIFY={\"appId\":\"$AWS_CLOUDFORMATION_CONFIG\",\"envName\":\"dev\",\"defaultEditor\":\"none\"}" >> $GITHUB_ENV
+          echo "AMPLIFY={\"appId\":\"$AMPLIFY_PROJECT_ID\",\"envName\":\"dev\",\"defaultEditor\":\"none\"}" >> $GITHUB_ENV
  
       - name: Deploy to AWS
         run: |
