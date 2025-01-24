@@ -11,24 +11,33 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 10
+      matrix:
+        node-version: [20.11.1]
 
     steps:
-      - name: Set base environment variables
-        run: |
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+  
+    - name: Set base environment variables
+      run: |
+          echo "node -v"
+          node -v
           if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
             echo "AWSCLOUDFORMATIONCONFIG={\\"configLevel\":\"project\",\\"useProfile\":true,\\"profileName\":\"default\",\\"region\":\"eu-central-1\"\}" >> $GITHUB_ENV
             echo "AMPLIFY="{\\"appId\":\"$AMPLIFY_PROJECT_ID\",\\"envName\":\"uat\",\\"defaultEditor\":\"none\"\}" >> $GITHUB_ENV
             echo "PROJECTCONFIG={\\"SourceDir\":\"src\",\\"DistributionDir\":\"build\",\\"BuildCommand\":\"npm.cmd run-script build\",\\"StartCommand\":\"npm.cmd run-script start\"\}" >> $GITHUB_ENV
           fi
- 
-      - name: Set dependent environment variables
-        run: |
+    - name: Set dependent environment variables
+      run: |
           echo "FRONTEND="{\\"frontend\":\"javascript\",\\"framework\":\"react\",\\"config\":$PROJECTCONFIG\}" >> $GITHUB_ENV
-          echo "PROVIDERS="{\\"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\}" >> $GITHUB_ENV
-          
- 
-      - name: Deploy to AWS
-        run: |
+          echo "PROVIDERS="{\\"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\}" >> $GITHUB_ENV    
+    - name: Deploy to AWS
+      run: |
           echo "Deploying to region $AWS_REGION with environment $AMPLIFY_ENV_NAME"
           # Your deployment commands here
           echo "Environment Name: $AWSCLOUDFORMATIONCONFIG"
