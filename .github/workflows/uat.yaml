@@ -28,12 +28,37 @@ jobs:
           echo "node -v"
           node -v
           if [[ "${{ github.ref }}" == "refs/heads/uat2" ]]; then
+
           AWSCLOUDFORMATIONCONFIG="{\
           \"configLevel\":\"project\",\
           \"useProfile\":true,\
           \"profileName\":\"default\",\
           \"region\":\"us-west-2\"\
-          }"  
+          }"
+
+          AMPLIFY="{\
+          \"appId\":\"$AMPLIFY_PROJECT_ID\",\
+          \"envName\":\"uattwo\",\
+          \"defaultEditor\":\"none\"\
+          }"
+
+          PROJECTCONFIG="{\
+          \"SourceDir\":\"src\",\
+          \"DistributionDir\":\"dist/vave-web\",\\"BuildCommand\":\"npm run-script build -- --env=$ENV\",\
+          \"StartCommand\":\"ng serve\"\
+          }"
+
+          FRONTEND="{\
+          \"frontend\":\"javascript\",\
+          \"framework\":\"react\",\
+          \"config\":$PROJECTCONFIG\
+          }"
+
+          PROVIDERS="{\
+          \"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\
+          }"
+
+          
           #echo "AWSCLOUDFORMATIONCONFIG"="{\"configLevel\":\"project\",\"useProfile\":true,\"profileName\":\"default\",\"region\":\"eu-central-1\"\}" >> $GITHUB_ENV
             #echo "AMPLIFY"="{\"appId\":\"$AMPLIFY_PROJECT_ID\",\"envName\":\"uat\",\"defaultEditor\":\"none\"\}" >> $GITHUB_ENV
             #echo "PROJECTCONFIG"="{\"SourceDir\":\"src\",\"DistributionDir\":\"build\",\"BuildCommand\":\"npm run-script build\",\"StartCommand\":\"npm run-script start\"\}" >> $GITHUB_ENV
