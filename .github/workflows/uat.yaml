@@ -31,9 +31,7 @@ jobs:
             echo "AWSCLOUDFORMATIONCONFIG={\\"configLevel\":\"project\",\\"useProfile\":true,\\"profileName\":\"default\",\\"region\":\"eu-central-1\"\}" >> $GITHUB_ENV
             echo "AMPLIFY="{\\"appId\":\"$AMPLIFY_PROJECT_ID\",\\"envName\":\"uat\",\\"defaultEditor\":\"none\"\}" >> $GITHUB_ENV
             echo "PROJECTCONFIG={\\"SourceDir\":\"src\",\\"DistributionDir\":\"build\",\\"BuildCommand\":\"npm.cmd run-script build\",\\"StartCommand\":\"npm.cmd run-script start\"\}" >> $GITHUB_ENV
-          fi    
-          echo "FRONTEND="{\\"frontend\":\"javascript\",\\"framework\":\"react\",\\"config\":$PROJECTCONFIG\}" >> $GITHUB_ENV
-          echo "PROVIDERS="{\\"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\}" >> $GITHUB_ENV
+          fi
     - name: Set dependent environment variables
       run: |
           echo "FRONTEND="{\\"frontend\":\"javascript\",\\"framework\":\"react\",\\"config\":$PROJECTCONFIG\}" >> $GITHUB_ENV
@@ -43,8 +41,8 @@ jobs:
       run: |
           echo "Deploying to region $AWS_REGION with environment $AMPLIFY_ENV_NAME"
           # Your deployment commands here
-          echo "Environment Name: $AWSCLOUDFORMATIONCONFIG"
-          echo "Amplify value: $AMPLIFY"
+          echo "AWSCLOUDFORMATIONCONFIG Name: $AWSCLOUDFORMATIONCONFIG"
+          echo "AMPLIFY value: $AMPLIFY"
           echo "PROJECTCONFIG value is : $PROJECTCONFIG"
           echo "FRONTEND value is : $FRONTEND"
           echo "PROVIDERS value is : $PROVIDERS"
@@ -69,4 +67,4 @@ jobs:
           echo $'\namplify publish...'
           export NODE_OPTIONS=--max_old_space_size=4000
           amplify publish -c --yes
-          
+
