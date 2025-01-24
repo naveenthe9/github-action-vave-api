@@ -6,6 +6,7 @@ on:
     branches:
       - uat2
 env:
+  CI: false
   AMPLIFY_PROJECT_ID: d16by1w8r30urm
   CLOUDFRONT_DISTRIBUTION_ID: E2FC181H5B6AM1
   ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
