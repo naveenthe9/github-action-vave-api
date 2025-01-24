@@ -87,7 +87,7 @@ jobs:
           aws configure set aws_secret_access_key "$SECRET_KEY" --profile default
           aws configure set region eu-central-1 --profile default
           aws configure set output json --profile default
-
+          sed -i 's/npm.cmd run-script build/npm run-script build/g' amplify/.config/project-config.json
           echo $'\n######################################################################';
           echo 'Installing AWS Amplify...';
           echo $'######################################################################\n';
