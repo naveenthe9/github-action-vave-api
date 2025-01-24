@@ -23,7 +23,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
        
-    - name: Set dependent environment variables
+    - name: Set base environment variables
       run: |
           echo "node -v"
           node -v
@@ -48,3 +48,25 @@ jobs:
           echo "PROJECTCONFIG value is : $PROJECTCONFIG"
           echo "FRONTEND value is : $FRONTEND"
           echo "PROVIDERS value is : $PROVIDERS"
+
+          echo $'\nConfiguring aws profile...'
+
+          aws --version
+          aws configure set aws_access_key_id "$ACCESS_KEY" --profile default
+          aws configure set aws_secret_access_key "$SECRET_KEY" --profile default
+          aws configure set region eu-central-1 --profile default
+          aws configure set output json --profile default
+
+          echo $'\n######################################################################';
+          echo 'Installing AWS Amplify...';
+          echo $'######################################################################\n';
+          
+          npm install -g @aws-amplify/cli
+          
+          echo 'Configure Amplify...'
+          echo $'\namplify pull...'
+          amplify pull --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
+          echo $'\namplify publish...'
+          export NODE_OPTIONS=--max_old_space_size=4000
+          amplify publish -c --yes
+          
