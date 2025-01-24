@@ -46,7 +46,8 @@ jobs:
 
           echo PROJECTCONFIG="{\
           \"SourceDir\":\"src\",\
-          \"DistributionDir\":\"build\",\\"BuildCommand\":\"npm run-script build\",\
+          \"DistributionDir\":\"build\",\
+          \"BuildCommand\":\"npm run-script build\",\
           \"StartCommand\":\"npm run-script start\"\
           }" >> $GITHUB_ENV
       
