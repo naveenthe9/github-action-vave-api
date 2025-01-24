@@ -29,7 +29,7 @@ const App = () => {
   return (
     
     <div className="App">
-      <h1>Super Super Worst React App</h1>
+      <h1>Super Super Worst App in the World</h1>
       <div>
           <input placeholder="customer id" type="text" value={input} onChange={(e) => setInput(e.target.value)}/>      
       </div>
