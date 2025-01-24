@@ -63,7 +63,11 @@ jobs:
           
           echo 'Configure Amplify...'
           echo $'\namplify pull...'
-          amplify pull --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
+          amplify pull \
+          --amplify $AMPLIFY \
+          --frontend $FRONTEND \
+          --providers $PROVIDERS \
+          --yes
           echo $'\namplify publish...'
           export NODE_OPTIONS=--max_old_space_size=4000
           amplify publish -c --yes
