@@ -72,6 +72,7 @@ jobs:
     
     - name: Deploy to AWS
       run: |
+          npm i
           echo "Deploying to region $AWS_REGION with environment $AMPLIFY_ENV_NAME"
           # Your deployment commands here
           echo "AWSCLOUDFORMATIONCONFIG Name: $AWSCLOUDFORMATIONCONFIG"
