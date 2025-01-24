@@ -29,12 +29,12 @@ jobs:
           node -v
           if [[ "${{ github.ref }}" == "refs/heads/uat2" ]]; then
 
-          AWSCLOUDFORMATIONCONFIG="{\
+          echo AWSCLOUDFORMATIONCONFIG="{\
           \"configLevel\":\"project\",\
           \"useProfile\":true,\
           \"profileName\":\"default\",\
           \"region\":\"us-west-2\"\
-          }"
+          }"  >> $GITHUB_ENV
 
 
 
