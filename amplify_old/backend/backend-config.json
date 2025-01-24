@@ -1,0 +1,50 @@
+{
+  "api": {
+    "apibbb94de3": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "sttaqlambdaapp"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "sttaqlambdaapp": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "hosting": {
+    "S3AndCloudFront": {
+      "providerPlugin": "awscloudformation",
+      "service": "S3AndCloudFront"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_sttaqlambdaapp_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "sttaqlambdaapp"
+        }
+      ]
+    },
+    "AMPLIFY_function_sttaqlambdaapp_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "sttaqlambdaapp"
+        }
+      ]
+    }
+  }
+}
