@@ -5,8 +5,8 @@ on:
     branches:
       - uat
 env:
-  AMPLIFY_PROJECT_ID: y2ive7qvralmt3
-  CLOUDFRONT_DISTRIBUTION_ID: EJD675VH0ZPN82
+  AMPLIFY_PROJECT_ID: d16by1w8r30urm
+  CLOUDFRONT_DISTRIBUTION_ID: E2FC181H5B6AM1
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -15,9 +15,9 @@ jobs:
       - name: Set base environment variables
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
-            echo "AWSCLOUDFORMATIONCONFIG={\\"configLevel\":\"project\",\\"useProfile\":true,\\"profileName\":\"default\",\\"region\":\"us-west-2\"\}" >> $GITHUB_ENV
-            echo "AMPLIFY="{\\"appId\":\"$AMPLIFY_PROJECT_ID\",\\"envName\":\"uattwo\",\\"defaultEditor\":\"none\"\}" >> $GITHUB_ENV
-            echo "PROJECTCONFIG={\\"SourceDir\":\"src\",\\"DistributionDir\":\"dist/vave-web\",\\"BuildCommand\":\"npm run-script build -- --env=$ENV\",\\"StartCommand\":\"ng serve\"\}" >> $GITHUB_ENV
+            echo "AWSCLOUDFORMATIONCONFIG={\\"configLevel\":\"project\",\\"useProfile\":true,\\"profileName\":\"default\",\\"region\":\"eu-central-1\"\}" >> $GITHUB_ENV
+            echo "AMPLIFY="{\\"appId\":\"$AMPLIFY_PROJECT_ID\",\\"envName\":\"uat\",\\"defaultEditor\":\"none\"\}" >> $GITHUB_ENV
+            echo "PROJECTCONFIG={\\"SourceDir\":\"src\",\\"DistributionDir\":\"build\",\\"BuildCommand\":\"npm.cmd run-script build\",\\"StartCommand\":\"npm.cmd run-script start\"\}" >> $GITHUB_ENV
           fi
  
       - name: Set dependent environment variables
