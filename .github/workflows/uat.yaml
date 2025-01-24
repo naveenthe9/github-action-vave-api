@@ -48,15 +48,6 @@ jobs:
           \"StartCommand\":\"ng serve\"\
           }" >> $GITHUB_ENV
 
-          echo FRONTEND="{\
-          \"frontend\":\"javascript\",\
-          \"framework\":\"react\",\
-          \"config\":$PROJECTCONFIG\
-          }" >> $GITHUB_ENV
-
-          echo PROVIDERS="{\
-          \"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\
-          }" >> $GITHUB_ENV
 
           
           #echo "AWSCLOUDFORMATIONCONFIG"="{\"configLevel\":\"project\",\"useProfile\":true,\"profileName\":\"default\",\"region\":\"eu-central-1\"\}" >> $GITHUB_ENV
