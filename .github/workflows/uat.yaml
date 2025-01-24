@@ -41,15 +41,7 @@ jobs:
           \"envName\":\"uattwo\",\
           \"defaultEditor\":\"none\"\
           }" >> $GITHUB_ENV
-
-          echo PROJECTCONFIG="{\
-          \"SourceDir\":\"src\",\
-          \"DistributionDir\":\"dist/vave-web\",\\"BuildCommand\":\"npm run-script build -- --env=$ENV\",\
-          \"StartCommand\":\"ng serve\"\
-          }" >> $GITHUB_ENV
-
-
-          
+      
           #echo "AWSCLOUDFORMATIONCONFIG"="{\"configLevel\":\"project\",\"useProfile\":true,\"profileName\":\"default\",\"region\":\"eu-central-1\"\}" >> $GITHUB_ENV
             #echo "AMPLIFY"="{\"appId\":\"$AMPLIFY_PROJECT_ID\",\"envName\":\"uat\",\"defaultEditor\":\"none\"\}" >> $GITHUB_ENV
             #echo "PROJECTCONFIG"="{\"SourceDir\":\"src\",\"DistributionDir\":\"build\",\"BuildCommand\":\"npm run-script build\",\"StartCommand\":\"npm run-script start\"\}" >> $GITHUB_ENV
