@@ -28,9 +28,9 @@ jobs:
           echo "node -v"
           node -v
           if [[ "${{ github.ref }}" == "refs/heads/uat2" ]]; then
-            echo "AWSCLOUDFORMATIONCONFIG"={\\"configLevel\":\"project\",\\"useProfile\":true,\\"profileName\":\"default\",\\"region\":\"eu-central-1\"\}" >> $GITHUB_ENV
+            echo "AWSCLOUDFORMATIONCONFIG"="{\\"configLevel\":\"project\",\\"useProfile\":true,\\"profileName\":\"default\",\\"region\":\"eu-central-1\"\}" >> $GITHUB_ENV
             echo "AMPLIFY"="{\\"appId\":\"$AMPLIFY_PROJECT_ID\",\\"envName\":\"uat\",\\"defaultEditor\":\"none\"\}" >> $GITHUB_ENV
-            echo "PROJECTCONFIG"={\\"SourceDir\":\"src\",\\"DistributionDir\":\"build\",\\"BuildCommand\":\"npm run-script build\",\\"StartCommand\":\"npm run-script start\"\}" >> $GITHUB_ENV
+            echo "PROJECTCONFIG"="{\\"SourceDir\":\"src\",\\"DistributionDir\":\"build\",\\"BuildCommand\":\"npm run-script build\",\\"StartCommand\":\"npm run-script start\"\}" >> $GITHUB_ENV
           fi
     - name: Set dependent environment variables
       run: |
