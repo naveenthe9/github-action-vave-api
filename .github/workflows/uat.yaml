@@ -8,6 +8,8 @@ on:
 env:
   AMPLIFY_PROJECT_ID: d16by1w8r30urm
   CLOUDFRONT_DISTRIBUTION_ID: E2FC181H5B6AM1
+  ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
 jobs:
   deploy:
     runs-on: ubuntu-latest
