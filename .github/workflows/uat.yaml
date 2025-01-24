@@ -22,8 +22,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-  
-    - name: Set base environment variables
+       
+    - name: Set dependent environment variables
       run: |
           echo "node -v"
           node -v
@@ -31,11 +31,14 @@ jobs:
             echo "AWSCLOUDFORMATIONCONFIG={\\"configLevel\":\"project\",\\"useProfile\":true,\\"profileName\":\"default\",\\"region\":\"eu-central-1\"\}" >> $GITHUB_ENV
             echo "AMPLIFY="{\\"appId\":\"$AMPLIFY_PROJECT_ID\",\\"envName\":\"uat\",\\"defaultEditor\":\"none\"\}" >> $GITHUB_ENV
             echo "PROJECTCONFIG={\\"SourceDir\":\"src\",\\"DistributionDir\":\"build\",\\"BuildCommand\":\"npm.cmd run-script build\",\\"StartCommand\":\"npm.cmd run-script start\"\}" >> $GITHUB_ENV
-          fi
+          fi    
+          echo "FRONTEND="{\\"frontend\":\"javascript\",\\"framework\":\"react\",\\"config\":$PROJECTCONFIG\}" >> $GITHUB_ENV
+          echo "PROVIDERS="{\\"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\}" >> $GITHUB_ENV
     - name: Set dependent environment variables
       run: |
           echo "FRONTEND="{\\"frontend\":\"javascript\",\\"framework\":\"react\",\\"config\":$PROJECTCONFIG\}" >> $GITHUB_ENV
-          echo "PROVIDERS="{\\"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\}" >> $GITHUB_ENV    
+          echo "PROVIDERS="{\\"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\}" >> $GITHUB_ENV
+    
     - name: Deploy to AWS
       run: |
           echo "Deploying to region $AWS_REGION with environment $AMPLIFY_ENV_NAME"
