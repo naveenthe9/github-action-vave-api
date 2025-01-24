@@ -106,4 +106,9 @@ jobs:
           echo $'\namplify publish...'
           export NODE_OPTIONS=--max_old_space_size=4000
           amplify publish -c --yes
+          aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths '/*'
+          
+          echo $'\n\n';
+          echo 'OK! Web deployed!'
+          echo "$(date)"
 
