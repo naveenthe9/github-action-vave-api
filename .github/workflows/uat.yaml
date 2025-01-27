@@ -13,7 +13,7 @@ env:
   SECRET_KEY: ${{ secrets.SECRET_KEY }}
 jobs:
   deploy:
-    runs-on: [self-hosted, sttaq_linux_1]
+    runs-on: ubuntu-latest
     strategy:
       max-parallel: 10
       matrix:
