@@ -6,7 +6,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    url: qa.4degreesind.com
     services:
       mysql:
         image: mysql:8.0
